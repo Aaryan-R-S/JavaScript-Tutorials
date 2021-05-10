@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi</title>
+</head>
+<body>
+    <h1>Editable Content</h1>
+    <!-- To display an editable content --
+    1. using HTML   
+         e.g.  <p contenteditable="true">Hi</p>   for any tag but temporary-- can make it permanent using js local storage
+
+    2. using JS -->
+    <textarea id="edit" style="display: inline-block; height: 100px; width: 300px; "></textarea>
+
+    <script>
+        //add event listener on click
+        //making it editable
+        let p= document.getElementById('edit');
+        p.addEventListener('click', ()=>{
+            p.contentEditable = true;
+
+        })
+
+        //add event listener on losing focus
+        //saving text
+         p.addEventListener('blur', ()=>{
+            localStorage.setItem('Text', p.value) //only works with .value --(not even with .innertext/html)
+         })
+         
+        
+        //show save text even on reload
+        let val = localStorage.getItem('Text')
+        if(val==null){
+            p.innerText='Click to edit me!'
+        }
+        else{
+            p.innerText= val
+        }
+     </script>
+</body>
+</html>
